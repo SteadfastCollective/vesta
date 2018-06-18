@@ -37,7 +37,7 @@ class VestaClass
      */
     public function __construct($host, $username, $password, $port = '8083', $path = 'api', $protocol = 'https')
     {
-        $this->client = new Client(['base_uri' => "{$protocol}://{$host}:{$port}/{$path}/"]);
+        $this->client = new Client(['base_uri' => "{$protocol}://{$host}:{$port}/{$path}/", "verify" => false]);
         $this->username = $username;
         $this->password = $password;
     }
@@ -52,91 +52,93 @@ class VestaClass
             $data
         );
 
-        $response = $this->client->request('POST', '/', [
+        $response = $this->client->request('POST', 'index.php', [
             'form_params' => $data
         ]);
 
-        switch ($response) {
-            case self:OK:
+        dd((string) $response->getBody());
+
+        switch ($response->getBody()) {
+            case self::OK:
                 return;
 
-            case self:E_ARGS:
+            case self::E_ARGS:
                 throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughArgumentsException("Not enough arguments provided");
                 break;
 
-            case self:E_INVALID:
+            case self::E_INVALID:
                 throw new \SteadfastCollective\Vesta\Exceptions\InvalidObjectOrArgumentException("Object or argument is not valid");
                 break;
 
-            case self:E_NOTEXIST:
+            case self::E_NOTEXIST:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectDoesntExistException("Object doesn't exist");
                 break;
 
-            case self:E_EXISTS:
+            case self::E_EXISTS:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyExistsException("Object already exists");
                 break;
 
-            case self:E_SUSPENDED:
+            case self::E_SUSPENDED:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectIsSuspendedException("Object is suspended");
                 break;
 
-            case self:E_UNSUSPENDED:
+            case self::E_UNSUSPENDED:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyUnsuspendedException("Object is already unsuspended");
                 break;
 
-            case self:E_INUSE:
+            case self::E_INUSE:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectInUseException("Object can't be deleted because is used by the other object");
                 break;
 
-            case self:E_LIMIT:
+            case self::E_LIMIT:
                 throw new \SteadfastCollective\Vesta\Exceptions\ReachedHostingPackageLimitsException("Object cannot be created because of hosting package limits");
                 break;
 
-            case self:E_PASSWORD:
+            case self::E_PASSWORD:
                 throw new \SteadfastCollective\Vesta\Exceptions\WrongPasswordException("Wrong password");
                 break;
 
-            case self:E_FORBIDDEN:
+            case self::E_FORBIDDEN:
                 throw new \SteadfastCollective\Vesta\Exceptions\ObjectCannotBeAccessedException("Object cannot be accessed be the user");
                 break;
 
-            case self:E_DISABLED:
+            case self::E_DISABLED:
                 throw new \SteadfastCollective\Vesta\Exceptions\SubsystemDisabledException("Subsystem is disabled");
                 break;
 
-            case self:E_PARSING:
+            case self::E_PARSING:
                 throw new \SteadfastCollective\Vesta\Exceptions\ConfigurationBrokenException("Configuration is broken");
                 break;
 
-            case self:E_DISK:
+            case self::E_DISK:
                 throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughDiskSpaceException("Not enough disk space to complete the action");
                 break;
 
-            case self:E_LA:
+            case self::E_LA:
                 throw new \SteadfastCollective\Vesta\Exceptions\ServerTooBusyException("Server is to busy to complete the action");
                 break;
 
-            case self:E_CONNECT:
+            case self::E_CONNECT:
                 throw new \SteadfastCollective\Vesta\Exceptions\HostUnreachableException("Connection failed. Host is unreachable");
                 break;
 
-            case self:E_FTP:
+            case self::E_FTP:
                 throw new \SteadfastCollective\Vesta\Exceptions\FtpServerNotRespondingException("FTP server is not responding");
                 break;
 
-            case self:E_DB:
+            case self::E_DB:
                 throw new \SteadfastCollective\Vesta\Exceptions\DatabaseServerNotRespondingException("Database server is not responding");
                 break;
 
-            case self:E_RRD:
+            case self::E_RRD:
                 throw new \SteadfastCollective\Vesta\Exceptions\RDDToolFailedToUpdateDatabaseException("RRDtool failed to update the database");
                 break;
 
-            case self:E_UPDATE:
+            case self::E_UPDATE:
                 throw new \SteadfastCollective\Vesta\Exceptions\UpdateOperationFailedException("Update operation failed");
                 break;
 
-            case self:E_RESTART:
+            case self::E_RESTART:
                 throw new \SteadfastCollective\Vesta\Exceptions\ServiceRestartFailedException("Service restart failed");
                 break;
 
