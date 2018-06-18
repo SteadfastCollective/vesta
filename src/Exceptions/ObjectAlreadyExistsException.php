@@ -4,7 +4,7 @@ namespace SteadfastCollective\Vesta\Exceptions;
 
 use Exception;
 
-class ObjectDoesntExistException extends Exception
+class ObjectAlreadyExistsException extends Exception
 {
     public function __construct($message = null)
     {
