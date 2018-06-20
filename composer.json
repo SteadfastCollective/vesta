@@ -1,6 +1,6 @@
 {
     "name": "steadfastcollective/vesta-php",
-    "description": ":package_description",
+    "description": "Vesta-php is a php package to help make calls to a Vesta Control Panel API.",
     "keywords": [
         "steadfastcollective",
         "vesta"
