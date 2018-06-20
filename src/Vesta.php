@@ -4,7 +4,7 @@ namespace SteadfastCollective\Vesta;
 
 use GuzzleHttp\Client;
 
-class VestaClass
+class Vesta
 {
     public $client;
     protected $username;
@@ -55,8 +55,6 @@ class VestaClass
         $response = $this->client->request('POST', 'index.php', [
             'form_params' => $data
         ]);
-
-        dd((string) $response->getBody());
 
         switch ($response->getBody()) {
             case self::OK:

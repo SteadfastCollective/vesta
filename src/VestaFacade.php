@@ -5,7 +5,7 @@ namespace SteadfastCollective\Vesta;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \SteadfastCollective\Vesta\VestaClass
+ * @see \SteadfastCollective\Vesta\Vesta
  */
 class VestaFacade extends Facade
 {
