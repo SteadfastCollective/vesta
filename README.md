@@ -1,27 +1,32 @@
-# Very short description of the package
+# Vesta PHP
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/steadfastcollective/:package_name.svg?style=flat-square)](https://packagist.org/packages/steadfastcollective/:package_name)
-[![Build Status](https://img.shields.io/travis/steadfastcollective/:package_name/master.svg?style=flat-square)](https://travis-ci.org/steadfastcollective/:package_name)
-[![Quality Score](https://img.shields.io/scrutinizer/g/steadfastcollective/:package_name.svg?style=flat-square)](https://scrutinizer-ci.com/g/steadfastcollective/:package_name)
-[![Total Downloads](https://img.shields.io/packagist/dt/steadfastcollective/:package_name.svg?style=flat-square)](https://packagist.org/packages/steadfastcollective/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/steadfastcollective/vesta-php.svg?style=flat-square)](https://packagist.org/packages/steadfastcollective/vesta-php)
+[![Build Status](https://img.shields.io/travis/steadfastcollective/vesta-php/master.svg?style=flat-square)](https://travis-ci.org/steadfastcollective/vesta-php)
+[![Quality Score](https://img.shields.io/scrutinizer/g/steadfastcollective/vesta-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/steadfastcollective/vesta-php)
+[![Total Downloads](https://img.shields.io/packagist/dt/steadfastcollective/vesta-php.svg?style=flat-square)](https://packagist.org/packages/steadfastcollective/vesta-php)
 
-**Note:** Replace ```:author_name``` ```:author_username``` ```:author_email``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Vesta-php is a php package to help make calls to a Vesta Control Panel API.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require steadfastcollective/:package_name
+composer require steadfastcollective/vesta-php
 ```
 
 ## Usage
 
 ``` php
-$vesta = new SteadfastCollective\Vesta();
-echo $vesta->echoPhrase('Hello, SteadfastCollective!');
+use SteadfastCollective\Vesta\Vesta;
+
+$response = (new Vesta($ip, $username, $password, $port))
+    ->request([
+        'cmd' => 'v-add-user',
+        'arg1' => 'example-username',
+        'arg2' => 'example-password',
+        'arg3' => 'example@example.com',
+    ]);
 ```
 
 ### Testing
@@ -44,7 +49,7 @@ If you discover any security related issues, please email dev@steadfastcollectiv
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Steadfast Collective](https://github.com/steadfastcollective)
 - [All Contributors](../../contributors)
 
 ## License
