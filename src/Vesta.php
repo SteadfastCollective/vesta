@@ -56,7 +56,7 @@ class Vesta
             'form_params' => $data
         ]);
 
-        switch ($response->getBody()) {
+        switch ((string) $response->getBody()) {
             case self::OK:
                 return;
 
