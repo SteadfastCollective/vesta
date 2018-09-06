@@ -56,93 +56,97 @@ class Vesta
             'form_params' => $data
         ]);
 
-        switch ((string) $response->getBody()) {
-            case self::OK:
-                return;
+        if ($data['returncode'] == 'yes') {
+            switch ((string) $response->getBody()) {
+                case self::OK:
+                    return;
 
-            case self::E_ARGS:
-                throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughArgumentsException("Not enough arguments provided");
-                break;
+                case self::E_ARGS:
+                    throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughArgumentsException("Not enough arguments provided");
+                    break;
 
-            case self::E_INVALID:
-                throw new \SteadfastCollective\Vesta\Exceptions\InvalidObjectOrArgumentException("Object or argument is not valid");
-                break;
+                case self::E_INVALID:
+                    throw new \SteadfastCollective\Vesta\Exceptions\InvalidObjectOrArgumentException("Object or argument is not valid");
+                    break;
 
-            case self::E_NOTEXIST:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectDoesntExistException("Object doesn't exist");
-                break;
+                case self::E_NOTEXIST:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectDoesntExistException("Object doesn't exist");
+                    break;
 
-            case self::E_EXISTS:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyExistsException("Object already exists");
-                break;
+                case self::E_EXISTS:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyExistsException("Object already exists");
+                    break;
 
-            case self::E_SUSPENDED:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectIsSuspendedException("Object is suspended");
-                break;
+                case self::E_SUSPENDED:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectIsSuspendedException("Object is suspended");
+                    break;
 
-            case self::E_UNSUSPENDED:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyUnsuspendedException("Object is already unsuspended");
-                break;
+                case self::E_UNSUSPENDED:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectAlreadyUnsuspendedException("Object is already unsuspended");
+                    break;
 
-            case self::E_INUSE:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectInUseException("Object can't be deleted because is used by the other object");
-                break;
+                case self::E_INUSE:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectInUseException("Object can't be deleted because is used by the other object");
+                    break;
 
-            case self::E_LIMIT:
-                throw new \SteadfastCollective\Vesta\Exceptions\ReachedHostingPackageLimitsException("Object cannot be created because of hosting package limits");
-                break;
+                case self::E_LIMIT:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ReachedHostingPackageLimitsException("Object cannot be created because of hosting package limits");
+                    break;
 
-            case self::E_PASSWORD:
-                throw new \SteadfastCollective\Vesta\Exceptions\WrongPasswordException("Wrong password");
-                break;
+                case self::E_PASSWORD:
+                    throw new \SteadfastCollective\Vesta\Exceptions\WrongPasswordException("Wrong password");
+                    break;
 
-            case self::E_FORBIDDEN:
-                throw new \SteadfastCollective\Vesta\Exceptions\ObjectCannotBeAccessedException("Object cannot be accessed be the user");
-                break;
+                case self::E_FORBIDDEN:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ObjectCannotBeAccessedException("Object cannot be accessed be the user");
+                    break;
 
-            case self::E_DISABLED:
-                throw new \SteadfastCollective\Vesta\Exceptions\SubsystemDisabledException("Subsystem is disabled");
-                break;
+                case self::E_DISABLED:
+                    throw new \SteadfastCollective\Vesta\Exceptions\SubsystemDisabledException("Subsystem is disabled");
+                    break;
 
-            case self::E_PARSING:
-                throw new \SteadfastCollective\Vesta\Exceptions\ConfigurationBrokenException("Configuration is broken");
-                break;
+                case self::E_PARSING:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ConfigurationBrokenException("Configuration is broken");
+                    break;
 
-            case self::E_DISK:
-                throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughDiskSpaceException("Not enough disk space to complete the action");
-                break;
+                case self::E_DISK:
+                    throw new \SteadfastCollective\Vesta\Exceptions\NotEnoughDiskSpaceException("Not enough disk space to complete the action");
+                    break;
 
-            case self::E_LA:
-                throw new \SteadfastCollective\Vesta\Exceptions\ServerTooBusyException("Server is to busy to complete the action");
-                break;
+                case self::E_LA:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ServerTooBusyException("Server is to busy to complete the action");
+                    break;
 
-            case self::E_CONNECT:
-                throw new \SteadfastCollective\Vesta\Exceptions\HostUnreachableException("Connection failed. Host is unreachable");
-                break;
+                case self::E_CONNECT:
+                    throw new \SteadfastCollective\Vesta\Exceptions\HostUnreachableException("Connection failed. Host is unreachable");
+                    break;
 
-            case self::E_FTP:
-                throw new \SteadfastCollective\Vesta\Exceptions\FtpServerNotRespondingException("FTP server is not responding");
-                break;
+                case self::E_FTP:
+                    throw new \SteadfastCollective\Vesta\Exceptions\FtpServerNotRespondingException("FTP server is not responding");
+                    break;
 
-            case self::E_DB:
-                throw new \SteadfastCollective\Vesta\Exceptions\DatabaseServerNotRespondingException("Database server is not responding");
-                break;
+                case self::E_DB:
+                    throw new \SteadfastCollective\Vesta\Exceptions\DatabaseServerNotRespondingException("Database server is not responding");
+                    break;
 
-            case self::E_RRD:
-                throw new \SteadfastCollective\Vesta\Exceptions\RDDToolFailedToUpdateDatabaseException("RRDtool failed to update the database");
-                break;
+                case self::E_RRD:
+                    throw new \SteadfastCollective\Vesta\Exceptions\RDDToolFailedToUpdateDatabaseException("RRDtool failed to update the database");
+                    break;
 
-            case self::E_UPDATE:
-                throw new \SteadfastCollective\Vesta\Exceptions\UpdateOperationFailedException("Update operation failed");
-                break;
+                case self::E_UPDATE:
+                    throw new \SteadfastCollective\Vesta\Exceptions\UpdateOperationFailedException("Update operation failed");
+                    break;
 
-            case self::E_RESTART:
-                throw new \SteadfastCollective\Vesta\Exceptions\ServiceRestartFailedException("Service restart failed");
-                break;
+                case self::E_RESTART:
+                    throw new \SteadfastCollective\Vesta\Exceptions\ServiceRestartFailedException("Service restart failed");
+                    break;
 
-            default:
-                throw new \Exception("An Error Occured.", (int) $response);
-                break;
+                default:
+                    throw new \Exception("An Error Occured.", (int) $response);
+                    break;
+            }
+
+            return (string) $response->getBody();
         }
     }
 }
