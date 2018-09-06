@@ -145,8 +145,8 @@ class Vesta
                     throw new \Exception("An Error Occured.", (int) $response);
                     break;
             }
-
-            return (string) $response->getBody();
         }
+
+        return (string) $response->getBody();
     }
 }
